@@ -6,21 +6,47 @@ namespace HeroisVSMonstres
         public static void Main()
         {
             Console.Clear();
-            MostrarMensajeBienvenida();
-            Console.ReadKey();
+            if (!MostrarMensajeBienvenida()) { return; }
             int level = EscogerDificultad();
-            string userInput = IntroducirNombrePersonajes();
-            string[] names = userInput.Split(' ');
-            string archerName = names[0];
-            string barbarianName = names[1];
-            string magicianName = names[2];
-            string druidName = names[3];
-
+            if (level == 1 || level == 2 || level == 3 || level == 4) 
+            {
+                string userInput = IntroducirNombrePersonajes();
+                string[] names = userInput.Split(' ');
+                string archerName = names[0];
+                string barbarianName = names[1];
+                string magicianName = names[2];
+                string druidName = names[3];
+            }
+            else { return; }
         }
-        public static void MostrarMensajeBienvenida()
+        public static bool MostrarMensajeBienvenida()
         {
-            const string MsgWelcome = "=============================================\r\n         Bienvenid@ a Héroes vs Monstruo\r\n=============================================";                       
-            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine(MsgWelcome);
+            const string MsgWelcome = "=============================================\r\n         Bienvenid@ a Héroes vs Monstruo\r\n=============================================";
+            const string ChooseOption = "1 - Iniciar partida    2 - Salir ";
+            const string MsgOutOfAttempts = "No has sido capaz de elegir entre 2 números, adiós!";
+
+            const int MaxAttempts = 3, OptionOne = 1, OptionTwo = 2;
+            int option, attempts = 0;
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine(MsgWelcome); Console.WriteLine();
+            do
+            {
+                Console.WriteLine(ChooseOption);
+                option = Convert.ToInt32(Console.ReadLine());
+                attempts++;
+                if (option == OptionOne)
+                {
+                    return true;
+                }
+                if (option == OptionTwo)
+                {
+                    return false;
+                }
+            } while (attempts < MaxAttempts && (option != OptionOne || option != OptionTwo));
+            if (attempts == MaxAttempts) 
+            { 
+                Console.WriteLine(MsgOutOfAttempts);
+            }
+            return false;
         }
         public static int EscogerDificultad()
         {
@@ -37,20 +63,17 @@ namespace HeroisVSMonstres
                 switch (level)
                 {
                     case 1:
-                        return level;   
                     case 2:
-                        return level;
                     case 3:
-                        return level;
                     case 4:
                         return level;
                 }
-            }while (attempts < MaxAttempts && (level != levelOne || level != levelTwo || level != levelThree || level != levelFour));
+            }while (attempts < MaxAttempts);
             if (attempts == MaxAttempts) 
             { 
                 Console.WriteLine(MsgOutOfAttempts);
             }
-            return 0;
+            return level;
             
         }
         public static string IntroducirNombrePersonajes()
