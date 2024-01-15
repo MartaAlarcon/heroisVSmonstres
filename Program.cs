@@ -21,6 +21,7 @@ namespace HeroisVSMonstres
                 string magicianName = names[2];
                 string druidName = names[3];
                 Console.Clear();
+
             }
             else { return; }
             switch (level)
