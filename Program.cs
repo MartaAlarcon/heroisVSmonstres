@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection.PortableExecutable;
+
 namespace HeroisVSMonstres
 {
     public class V2
@@ -18,6 +20,7 @@ namespace HeroisVSMonstres
                 string barbarianName = names[1];
                 string magicianName = names[2];
                 string druidName = names[3];
+                Console.Clear();
             }
             else { return; }
             switch (level)
@@ -41,7 +44,351 @@ namespace HeroisVSMonstres
                     Console.WriteLine(MsgContinue);
                     Console.ReadKey();
                     break;
+                case 3:
+                    int [] archerCustomized = AñadirValoresAqueraNivelPersonalizado();
+                    int[] barbarianCustomized = AñadirValoresBarbaroNivelPersonalizado();
+                    int[] magicianCustomized = AñadirValoresMagaNivelPersonalizado();
+                    int[] druidCustomized = AñadirValoresDruidaNivelPersonalizado();
+                    int[] monsterCustomized = AñadirValoresMonstruoNivelPersonalizado();
+                    Console.WriteLine(MsgContinue);
+                    Console.ReadKey();
+                    break;
             }
+        }
+        public static int[] AñadirValoresAqueraNivelPersonalizado()
+        {
+            const string MsgArcher = "           _____   ____  _    _ ______ _____            \r\n     /\\   |  __ \\ / __ \\| |  | |  ____|  __ \\     /\\    \r\n    /  \\  | |__) | |  | | |  | | |__  | |__) |   /  \\   \r\n   / /\\ \\ |  _  /| |  | | |  | |  __| |  _  /   / /\\ \\  \r\n  / ____ \\| | \\ \\| |__| | |__| | |____| | \\ \\  / ____ \\ \r\n /_/    \\_\\_|  \\_\\\\___\\_\\\\____/|______|_|  \\_\\/_/    \\_\\\r\n                                                        \r\n                                                        ";
+            const string MsgLife = "Introduce la vida dentro del rango [1500, 2000]";
+            const string MsgAttack = "Introduce el ataque dentro del rango [200, 300]";
+            const string MsgReduction = "Introduce la reducción de daño dentro del rango [25, 35]%";
+            const string MsgOutOfAttempts = "Se atribuye el valor más bajo por quedarte sin intentos";
+            const int MaxAttemptsLife = 3, MinLife = 1500, MaxLife = 2000, MaxAttemptsAttack = 3, MinAttack = 200, MaxAttack = 300, MaxAttemptsReduction = 3, MinReduction = 25, MaxReduction = 35;
+            int[] archer = new int[3];
+            int life, attack, reduction, attemptsLife = 0, attemptsAttack = 0, attemptsReduction = 0 ;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine(MsgArcher);
+            do
+            {
+                Console.WriteLine(MsgLife);
+                life = Convert.ToInt32(Console.ReadLine());
+                if (life >= MinLife && life <= MaxLife)
+                {
+                    archer[0] = life;
+                    attemptsLife = MaxAttemptsLife + 1;
+                }
+                attemptsLife++;
+            } while (attemptsLife < MaxAttemptsLife);
+            if (attemptsLife == MaxAttemptsLife)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                archer[0] = MinLife;
+            }
+            do
+            {
+                Console.WriteLine(MsgAttack);
+                attack = Convert.ToInt32(Console.ReadLine());
+                if (attack >= MinAttack && attack <= MaxAttack)
+                {
+                    archer[1] = attack;
+                    attemptsAttack = MaxAttemptsAttack + 1;
+                }
+                attemptsAttack++;
+            } while (attemptsAttack < MaxAttemptsAttack);
+            if (attemptsAttack == MaxAttemptsAttack)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                archer[1] = MinAttack;
+            }
+            do
+            {
+                Console.WriteLine(MsgReduction);
+                reduction = Convert.ToInt32(Console.ReadLine());
+                if (reduction >= MinReduction && reduction <= MaxReduction)
+                {
+                    archer[2] = reduction;
+                    attemptsReduction = MaxAttemptsReduction + 1;
+                }
+                attemptsReduction++;
+            } while (attemptsReduction < MaxAttemptsReduction);
+            if (attemptsReduction == MaxAttemptsReduction)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                archer[2] = MinReduction;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Vida: {archer[0]}");
+            Console.WriteLine($"Ataque: {archer[1]}");
+            Console.WriteLine($"Reducción: {archer[2]}%");
+            Console.ForegroundColor = ConsoleColor.White;
+            return archer;
+        }
+        public static int[] AñadirValoresBarbaroNivelPersonalizado()
+        {
+            const string MsgBarbarian = "  ____    __   _____  ____          _____   ____  \r\n |  _ \\  /_/  |  __ \\|  _ \\   /\\   |  __ \\ / __ \\ \r\n | |_) | / \\  | |__) | |_) | /  \\  | |__) | |  | |\r\n |  _ < / _ \\ |  _  /|  _ < / /\\ \\ |  _  /| |  | |\r\n | |_) / ___ \\| | \\ \\| |_) / ____ \\| | \\ \\| |__| |\r\n |____/_/   \\_\\_|  \\_\\____/_/    \\_\\_|  \\_\\\\____/ \r\n                                                  \r\n                                                  ";
+            const string MsgLife = "Introduce la vida dentro del rango [3000, 3750]";
+            const string MsgAttack = "Introduce el ataque dentro del rango [150, 250]";
+            const string MsgReduction = "Introduce la reducción de daño dentro del rango [35, 45]%";
+            const string MsgOutOfAttempts = "Se atribuye el valor más bajo por quedarte sin intentos";
+            const int MaxAttemptsLife = 3, MinLife = 3000, MaxLife = 3750, MaxAttemptsAttack = 3, MinAttack = 150, MaxAttack = 250, MaxAttemptsReduction = 3, MinReduction = 35, MaxReduction = 45;
+            int[] barbarian = new int[3];
+            int life, attack, reduction, attemptsLife = 0, attemptsAttack = 0, attemptsReduction = 0;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(MsgBarbarian);
+            do
+            {
+                Console.WriteLine(MsgLife);
+                life = Convert.ToInt32(Console.ReadLine());
+                if (life >= MinLife && life <= MaxLife)
+                {
+                    barbarian[0] = life;
+                    attemptsLife = MaxAttemptsLife + 1;
+                }
+                attemptsLife++;
+            } while (attemptsLife < MaxAttemptsLife);
+            if (attemptsLife == MaxAttemptsLife)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                barbarian[0] = MinLife;
+            }
+            do
+            {
+                Console.WriteLine(MsgAttack);
+                attack = Convert.ToInt32(Console.ReadLine());
+                if (attack >= MinAttack && attack <= MaxAttack)
+                {
+                    barbarian[1] = attack;
+                    attemptsAttack = MaxAttemptsAttack + 1;
+                }
+                attemptsAttack++;
+            } while (attemptsAttack < MaxAttemptsAttack);
+            if (attemptsAttack == MaxAttemptsAttack)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                barbarian[1] = MinAttack;
+            }
+            do
+            {
+                Console.WriteLine(MsgReduction);
+                reduction = Convert.ToInt32(Console.ReadLine());
+                if (reduction >= MinReduction && reduction <= MaxReduction)
+                {
+                    barbarian[2] = reduction;
+                    attemptsReduction = MaxAttemptsReduction + 1;
+                }
+                attemptsReduction++;
+            } while (attemptsReduction < MaxAttemptsReduction);
+            if (attemptsReduction == MaxAttemptsReduction)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                barbarian[2] = MinReduction;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Vida: {barbarian[0]}");
+            Console.WriteLine($"Ataque: {barbarian[1]}");
+            Console.WriteLine($"Reducción: {barbarian[2]}%");
+            Console.ForegroundColor = ConsoleColor.White;
+            return barbarian;
+        }
+        public static int[] AñadirValoresMagaNivelPersonalizado()
+        {
+            const string MsgMagician = " __  __          _____          \r\n |  \\/  |   /\\   / ____|   /\\    \r\n | \\  / |  /  \\ | |  __   /  \\   \r\n | |\\/| | / /\\ \\| | |_ | / /\\ \\  \r\n | |  | |/ ____ \\ |__| |/ ____ \\ \r\n |_|  |_/_/    \\_\\_____/_/    \\_\\\r\n                                 \r\n                                 ";
+            const string MsgLife = "Introduce la vida dentro del rango [1100, 1500]";
+            const string MsgAttack = "Introduce el ataque dentro del rango [300, 400]";
+            const string MsgReduction = "Introduce la reducción de daño dentro del rango [20, 35]%";
+            const string MsgOutOfAttempts = "Se atribuye el valor más bajo por quedarte sin intentos";
+            const int MaxAttemptsLife = 3, MinLife = 1100, MaxLife = 1500, MaxAttemptsAttack = 3, MinAttack = 300, MaxAttack = 400, MaxAttemptsReduction = 3, MinReduction = 20, MaxReduction = 35;
+            int[] magician = new int[3];
+            int life, attack, reduction, attemptsLife = 0, attemptsAttack = 0, attemptsReduction = 0;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine(MsgMagician);
+            do
+            {
+                Console.WriteLine(MsgLife);
+                life = Convert.ToInt32(Console.ReadLine());
+                if (life >= MinLife && life <= MaxLife)
+                {
+                    magician[0] = life;
+                    attemptsLife = MaxAttemptsLife + 1;
+                }
+                attemptsLife++;
+            } while (attemptsLife < MaxAttemptsLife);
+            if (attemptsLife == MaxAttemptsLife)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                magician[0] = MinLife;
+            }
+            do
+            {
+                Console.WriteLine(MsgAttack);
+                attack = Convert.ToInt32(Console.ReadLine());
+                if (attack >= MinAttack && attack <= MaxAttack)
+                {
+                    magician[1] = attack;
+                    attemptsAttack = MaxAttemptsAttack + 1;
+                }
+                attemptsAttack++;
+            } while (attemptsAttack < MaxAttemptsAttack);
+            if (attemptsAttack == MaxAttemptsAttack)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                magician[1] = MinAttack;
+            }
+            do
+            {
+                Console.WriteLine(MsgReduction);
+                reduction = Convert.ToInt32(Console.ReadLine());
+                if (reduction >= MinReduction && reduction <= MaxReduction)
+                {
+                    magician[2] = reduction;
+                    attemptsReduction = MaxAttemptsReduction + 1;
+                }
+                attemptsReduction++;
+            } while (attemptsReduction < MaxAttemptsReduction);
+            if (attemptsReduction == MaxAttemptsReduction)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                magician[2] = MinReduction;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Vida: {magician[0]}");
+            Console.WriteLine($"Ataque: {magician[1]}");
+            Console.WriteLine($"Reducción: {magician[2]}%");
+            Console.ForegroundColor = ConsoleColor.White;
+            return magician;
+        }
+        public static int[] AñadirValoresDruidaNivelPersonalizado()
+        {
+            const string MsgDruid = "  _____  _____  _    _ _____ _____          \r\n |  __ \\|  __ \\| |  | |_   _|  __ \\   /\\    \r\n | |  | | |__) | |  | | | | | |  | | /  \\   \r\n | |  | |  _  /| |  | | | | | |  | |/ /\\ \\  \r\n | |__| | | \\ \\| |__| |_| |_| |__| / ____ \\ \r\n |_____/|_|  \\_\\\\____/|_____|_____/_/    \\_\\\r\n                                            \r\n                                            ";
+            const string MsgLife = "Introduce la vida dentro del rango [2000, 2500]";
+            const string MsgAttack = "Introduce el ataque dentro del rango [70, 150]";
+            const string MsgReduction = "Introduce la reducción de daño dentro del rango [25, 40]%";
+            const string MsgOutOfAttempts = "Se atribuye el valor más bajo por quedarte sin intentos";
+            const int MaxAttemptsLife = 3, MinLife = 2000, MaxLife = 2500, MaxAttemptsAttack = 3, MinAttack = 70, MaxAttack = 150, MaxAttemptsReduction = 3, MinReduction = 25, MaxReduction = 40;
+            int[] druid = new int[3];
+            int life, attack, reduction, attemptsLife = 0, attemptsAttack = 0, attemptsReduction = 0;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(MsgDruid);
+            do
+            {
+                Console.WriteLine(MsgLife);
+                life = Convert.ToInt32(Console.ReadLine());
+                if (life >= MinLife && life <= MaxLife)
+                {
+                    druid[0] = life;
+                    attemptsLife = MaxAttemptsLife + 1;
+                }
+                attemptsLife++;
+            } while (attemptsLife < MaxAttemptsLife);
+            if (attemptsLife == MaxAttemptsLife)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                druid[0] = MinLife;
+            }
+            do
+            {
+                Console.WriteLine(MsgAttack);
+                attack = Convert.ToInt32(Console.ReadLine());
+                if (attack >= MinAttack && attack <= MaxAttack)
+                {
+                    druid[1] = attack;
+                    attemptsAttack = MaxAttemptsAttack + 1;
+                }
+                attemptsAttack++;
+            } while (attemptsAttack < MaxAttemptsAttack);
+            if (attemptsAttack == MaxAttemptsAttack)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                druid[1] = MinAttack;
+            }
+            do
+            {
+                Console.WriteLine(MsgReduction);
+                reduction = Convert.ToInt32(Console.ReadLine());
+                if (reduction >= MinReduction && reduction <= MaxReduction)
+                {
+                    druid[2] = reduction;
+                    attemptsReduction = MaxAttemptsReduction + 1;
+                }
+                attemptsReduction++;
+            } while (attemptsReduction < MaxAttemptsReduction);
+            if (attemptsReduction == MaxAttemptsReduction)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                druid[2] = MinReduction;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Vida: {druid[0]}");
+            Console.WriteLine($"Ataque: {druid[1]}");
+            Console.WriteLine($"Reducción: {druid[2]}%");
+            Console.ForegroundColor = ConsoleColor.White;
+            return druid;
+        }
+        public static int[] AñadirValoresMonstruoNivelPersonalizado()
+        {
+            const string MsgMonster = "  __  __  ____  _   _  _____ _______ _____  _    _  ____  \r\n |  \\/  |/ __ \\| \\ | |/ ____|__   __|  __ \\| |  | |/ __ \\ \r\n | \\  / | |  | |  \\| | (___    | |  | |__) | |  | | |  | |\r\n | |\\/| | |  | | . ` |\\___ \\   | |  |  _  /| |  | | |  | |\r\n | |  | | |__| | |\\  |____) |  | |  | | \\ \\| |__| | |__| |\r\n |_|  |_|\\____/|_| \\_|_____/   |_|  |_|  \\_\\\\____/ \\____/ \r\n                                                          \r\n                                                          ";
+            const string MsgLife = "Introduce la vida dentro del rango [7000, 10000]";
+            const string MsgAttack = "Introduce el ataque dentro del rango [300, 400]";
+            const string MsgReduction = "Introduce la reducción de daño dentro del rango [20, 30]%";
+            const string MsgOutOfAttempts = "Se atribuye el valor más bajo por quedarte sin intentos";
+            const int MaxAttemptsLife = 3, MinLife = 7000, MaxLife = 10000, MaxAttemptsAttack = 3, MinAttack = 300, MaxAttack = 400, MaxAttemptsReduction = 3, MinReduction = 20, MaxReduction = 30;
+            int[] monster = new int[3];
+            int life, attack, reduction, attemptsLife = 0, attemptsAttack = 0, attemptsReduction = 0;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(MsgMonster);
+            do
+            {
+                Console.WriteLine(MsgLife);
+                life = Convert.ToInt32(Console.ReadLine());
+                if (life >= MinLife && life <= MaxLife)
+                {
+                    monster[0] = life;
+                    attemptsLife = MaxAttemptsLife + 1;
+                }
+                attemptsLife++;
+            } while (attemptsLife < MaxAttemptsLife);
+            if (attemptsLife == MaxAttemptsLife)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                monster[0] = MinLife;
+            }
+            do
+            {
+                Console.WriteLine(MsgAttack);
+                attack = Convert.ToInt32(Console.ReadLine());
+                if (attack >= MinAttack && attack <= MaxAttack)
+                {
+                    monster[1] = attack;
+                    attemptsAttack = MaxAttemptsAttack + 1;
+                }
+                attemptsAttack++;
+            } while (attemptsAttack < MaxAttemptsAttack);
+            if (attemptsAttack == MaxAttemptsAttack)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                monster[1] = MinAttack;
+            }
+            do
+            {
+                Console.WriteLine(MsgReduction);
+                reduction = Convert.ToInt32(Console.ReadLine());
+                if (reduction >= MinReduction && reduction <= MaxReduction)
+                {
+                    monster[2] = reduction;
+                    attemptsReduction = MaxAttemptsReduction + 1;
+                }
+                attemptsReduction++;
+            } while (attemptsReduction < MaxAttemptsReduction);
+            if (attemptsReduction == MaxAttemptsReduction)
+            {
+                Console.WriteLine(MsgOutOfAttempts);
+                monster[2] = MinReduction;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Vida: {monster[0]}");
+            Console.WriteLine($"Ataque: {monster[1]}");
+            Console.WriteLine($"Reducción: {monster[2]}%");
+            Console.ForegroundColor = ConsoleColor.White;
+            return monster;
         }
         public static int[] AñadirValoresArqueraNivelFacil()
         {
