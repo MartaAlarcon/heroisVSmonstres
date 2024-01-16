@@ -307,6 +307,34 @@ namespace HeroisVSMonstres
            
             } while (auxEnd == 123456789);
         }
+        public static void OrdenarVidas(int archerLife, int barbarianLife, int magicianLife, int druidLife, string archerName, string barbarianName, string magicianName, string druidName)
+        {
+            string[] heroesNames = { archerName, barbarianName, magicianName, druidName };
+            int[] heroes = { archerLife, barbarianLife, magicianLife, druidLife };
+            int n = heroes.Length;
+
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - 1 - i; j++)
+                {
+                    if (heroes[j] < heroes[j + 1])
+                    {
+                        int tempLife = heroes[j];
+                        heroes[j] = heroes[j + 1];
+                        heroes[j + 1] = tempLife;
+
+                        string tempName = heroesNames[j];
+                        heroesNames[j] = heroesNames[j + 1];
+                        heroesNames[j + 1] = tempName;
+                    }
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"{heroesNames[i]}: {heroes[i]}");
+            }
+        }
         public static int AñadirValoresRandom(int Min, int Max) 
         { 
             Random rand = new Random();
