@@ -31,7 +31,7 @@ namespace HeroisVSMonstres
             const string MsgMonsterLife = "Introduce la vida dentro del rango [7000, 10000]";
             const string MsgMonsterAttack = "Introduce el ataque dentro del rango [300, 400]";
             const string MsgMonsterReduction = "Introduce la reducción de daño dentro del rango [20, 30]%";
-            const int MaxAttempts = 3, levelOne = 1, levelTwo = 2, levelThree = 3, levelFour = 4, MinArcherLife = 1500, MaxArcherLife = 2000, MinArcherAttack = 200, MaxArcherAttack = 300, MinArcherReduction = 25, MaxArcherReduction = 35,
+            const int MaxAttempts = 3, levelOne = 1, levelFour = 4, MinArcherLife = 1500, MaxArcherLife = 2000, MinArcherAttack = 200, MaxArcherAttack = 300, MinArcherReduction = 25, MaxArcherReduction = 35,
             MinBarbarianLife = 3000, MaxBarbarianLife = 3750, MinBarbarianAttack = 150, MaxBarbarianAttack = 250, MinBarbarianReduction = 35, MaxBarbarianReduction = 45,
             MinMagicianLife = 1100, MaxMagicianLife = 1500,  MinMagicianAttack = 300, MaxMagicianAttack = 400, MinMagicianReduction = 20, MaxMagicianReduction = 35, 
             MinDruidLife = 2000, MaxDruidLife = 2500, MinDruidAttack = 70, MaxDruidAttack = 150, MinDruidReduction = 25, MaxDruidReduction = 40,
@@ -261,14 +261,60 @@ namespace HeroisVSMonstres
                     if (attempts == 3) { Console.WriteLine($"{MsgOutOfAttempts}, se te atribuye el valor más bajo"); monsterReduction = MinMonsterReduction; }
 
                     break;
+                case 4:
+                    Console.Clear();
+                    archerLife = AñadirValoresRandom(MinArcherLife, MaxArcherLife);
+                    archerAttack = AñadirValoresRandom(MinArcherAttack, MaxArcherAttack);
+                    archerReduction = AñadirValoresRandom(MinArcherReduction, MaxArcherReduction);
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine(MsgArcher);
+                    MostrarValores(archerLife, archerAttack, archerReduction);
+
+                    barbarianLife = AñadirValoresRandom(MinBarbarianLife, MaxBarbarianLife);
+                    barbarianAttack = AñadirValoresRandom(MinBarbarianAttack, MaxBarbarianAttack);
+                    barbarianReduction = AñadirValoresRandom(MinBarbarianReduction, MaxBarbarianReduction);
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine(MsgBarbarian);
+                    MostrarValores(barbarianLife, barbarianAttack, barbarianReduction);
+
+                    magicianLife = AñadirValoresRandom(MinMagicianLife, MaxMagicianLife);
+                    magicianAttack = AñadirValoresRandom(MinMagicianAttack, MaxMagicianAttack);
+                    magicianReduction = AñadirValoresRandom(MinMagicianReduction, MaxMagicianReduction);
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine(MsgMagician);
+                    MostrarValores(magicianLife, magicianAttack, magicianReduction);
+
+                    druidLife = AñadirValoresRandom(MinDruidLife, MaxDruidLife);
+                    druidAttack = AñadirValoresRandom(MinDruidAttack, MaxDruidAttack);
+                    druidReduction = AñadirValoresRandom(MinDruidReduction, MaxDruidReduction);
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(MsgDruid);
+                    MostrarValores(druidLife, druidAttack, druidReduction);
+
+                    monsterLife = AñadirValoresRandom(MinMonsterLife, MaxMonsterLife);
+                    monsterAttack = AñadirValoresRandom(MinMonsterAttack, MaxMonsterAttack);
+                    monsterReduction = AñadirValoresRandom(MinMonsterReduction, MaxMonsterReduction);
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine(MsgMonster);
+                    MostrarValores(monsterLife, monsterAttack, monsterReduction);
+
+                    Console.WriteLine(MsgContinue);
+                    Console.ReadKey();
+                    break;
 
             }
            
             } while (auxEnd == 123456789);
         }
-        public static bool AñadirValoresPersonalizados(int life, int MaxLife,  int MinLife)
+        public static int AñadirValoresRandom(int Min, int Max) 
+        { 
+            Random rand = new Random();
+            int result = rand.Next(Min, Max);
+            return result; 
+        }
+        public static bool AñadirValoresPersonalizados(int life, int Max,  int Min)
         {
-            if (life < MinLife || life > MaxLife)
+            if (life < Min || life > Max)
             {
                 return false;
             }
