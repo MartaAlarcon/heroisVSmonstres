@@ -38,6 +38,7 @@ namespace HeroisVSMonstres
             MinMonsterLife = 7000, MaxMonsterLife = 10000, MinMonsterAttack = 300, MaxMonsterAttack = 400, MinMonsterReduction = 20, MaxMonsterReduction = 30;
 
             int attempts = 0, level, auxEnd = 123456789, archerLife, archerAttack, archerReduction, barbarianLife, barbarianAttack, barbarianReduction, magicianLife, magicianAttack, magicianReduction, druidLife, druidAttack, druidReduction, monsterLife, monsterAttack, monsterReduction;
+
             do
             {
                 Console.Clear();
