@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Reflection.Emit;
 using System.Reflection.PortableExecutable;
-
+using System.Text;
+using System.Threading;
+using System.Xml.Linq;
+using BattleFunction;
 namespace HeroisVSMonstres
 {
     public class V2
     {
         public static void Main()
         {
+            MyBattle battle = new MyBattle();
             const string MsgContinue = "Pulsa cualquier tecla para continuar...";
             const string MsgDifficulty = "Escoge la dificultad:\r\n    1 - Fácil\r\n    2 - Difícil\r\n    3 - Personalizado\r\n    4 - Random";
             const string MsgOutOfAttempts = "Te has quedado sin intentos";
@@ -71,6 +75,7 @@ namespace HeroisVSMonstres
                     archerLife = MaxArcherLife; archerAttack = MaxArcherAttack; archerReduction = MaxArcherReduction;
                     Console.WriteLine(MsgArcher);
                     MostrarValores(archerLife, archerAttack, archerReduction);
+                    
 
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     barbarianLife = MaxBarbarianLife; barbarianAttack = MaxBarbarianAttack; barbarianReduction = MaxBarbarianReduction;
@@ -91,6 +96,8 @@ namespace HeroisVSMonstres
                     monsterLife = MinMonsterLife; monsterAttack = MinMonsterAttack; monsterReduction = MinMonsterReduction;
                     Console.WriteLine(MsgMonster);
                     MostrarValores(monsterLife, monsterAttack, monsterReduction);
+
+                    MyBattle.StartBattle(monsterLife, archerLife, barbarianLife, magicianLife, druidLife, monsterAttack, archerAttack, barbarianAttack, magicianAttack, druidAttack, monsterReduction, archerReduction, barbarianReduction, magicianReduction, druidReduction, archerName, barbarianName, magicianName, druidName);
                     break;
                 case 2:
                     Console.Clear();
@@ -118,6 +125,8 @@ namespace HeroisVSMonstres
                     monsterLife = MaxMonsterLife; monsterAttack = MaxMonsterAttack; monsterReduction = MaxMonsterReduction;
                     Console.WriteLine(MsgMonster);
                     MostrarValores(monsterLife, monsterAttack, monsterReduction);
+
+                    MyBattle.StartBattle(monsterLife, archerLife, barbarianLife, magicianLife, druidLife, monsterAttack, archerAttack, barbarianAttack, magicianAttack, druidAttack, monsterReduction, archerReduction, barbarianReduction, magicianReduction, druidReduction, archerName, barbarianName, magicianName, druidName);
 
                     break;
                 case 3:
@@ -261,6 +270,8 @@ namespace HeroisVSMonstres
                     } while (!AñadirValoresPersonalizados(monsterReduction, MaxMonsterReduction, MinMonsterReduction) && attempts < MaxAttempts);
                     if (attempts == 3) { Console.WriteLine($"{MsgOutOfAttempts}, se te atribuye el valor más bajo"); monsterReduction = MinMonsterReduction; }
 
+                     MyBattle.StartBattle(monsterLife, archerLife, barbarianLife, magicianLife, druidLife, monsterAttack, archerAttack, barbarianAttack, magicianAttack, druidAttack, monsterReduction, archerReduction, barbarianReduction, magicianReduction, druidReduction, archerName, barbarianName, magicianName, druidName);
+
                     break;
                 case 4:
                     Console.Clear();
@@ -299,6 +310,8 @@ namespace HeroisVSMonstres
                     Console.WriteLine(MsgMonster);
                     MostrarValores(monsterLife, monsterAttack, monsterReduction);
 
+                    MyBattle.StartBattle(monsterLife, archerLife, barbarianLife, magicianLife, druidLife, monsterAttack, archerAttack, barbarianAttack, magicianAttack, druidAttack, monsterReduction, archerReduction, barbarianReduction, magicianReduction, druidReduction, archerName, barbarianName, magicianName, druidName);
+
                     Console.WriteLine(MsgContinue);
                     Console.ReadKey();
                     break;
@@ -306,34 +319,6 @@ namespace HeroisVSMonstres
             }
            
             } while (auxEnd == 123456789);
-        }
-        public static void OrdenarVidas(int archerLife, int barbarianLife, int magicianLife, int druidLife, string archerName, string barbarianName, string magicianName, string druidName)
-        {
-            string[] heroesNames = { archerName, barbarianName, magicianName, druidName };
-            int[] heroes = { archerLife, barbarianLife, magicianLife, druidLife };
-            int n = heroes.Length;
-
-
-            for (int i = 0; i < n - 1; i++)
-            {
-                for (int j = 0; j < n - 1 - i; j++)
-                {
-                    if (heroes[j] < heroes[j + 1])
-                    {
-                        int tempLife = heroes[j];
-                        heroes[j] = heroes[j + 1];
-                        heroes[j + 1] = tempLife;
-
-                        string tempName = heroesNames[j];
-                        heroesNames[j] = heroesNames[j + 1];
-                        heroesNames[j + 1] = tempName;
-                    }
-                }
-            }
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine($"{heroesNames[i]}: {heroes[i]}");
-            }
         }
         public static int AñadirValoresRandom(int Min, int Max) 
         { 
@@ -403,7 +388,6 @@ namespace HeroisVSMonstres
             }
             return false;
         }
-
     }
 }
 
