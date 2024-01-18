@@ -194,7 +194,7 @@ namespace BattleFunction
                     reduction = reduction * 2; // se añade el doble de reducción de daño porque así se ha escogido
                     int finalDamage = attack * reduction / 100;
                     life -= (attack - finalDamage);
-                    Console.WriteLine($"{name} usa su habilidad de defensa y recibe solo {finalDamage} puntos de daño");
+                    Console.WriteLine($"{name} usa su habilidad de defensa y recibe solo {attack - finalDamage} puntos de daño");
                     Console.WriteLine($"Vida restante de {name}: {life}");
                     return life;
                 }
@@ -203,7 +203,7 @@ namespace BattleFunction
                     Console.WriteLine($"El monstruo ataca y hace {attack} puntos de daño");
                     int finalDamage = attack * reduction / 100;
                     life -= (attack - finalDamage);
-                    Console.WriteLine($"{name} se defiende y recibe solo {finalDamage} puntos de daño");
+                    Console.WriteLine($"{name} se defiende y recibe solo {attack - finalDamage} puntos de daño");
                     Console.WriteLine($"Vida restante de {name}: {life}");
                     return life;
                 }
@@ -219,7 +219,7 @@ namespace BattleFunction
                 Console.WriteLine($"{name} ataca y hace {attack * 3} puntos de daño");
                 int finalDamage = (attack*3) * monsterReduction / 100;
                 monsterLife -= (attack - finalDamage);
-                Console.WriteLine($"El monstruo se defiende y recibe solo {finalDamage} puntos de daño");
+                Console.WriteLine($"El monstruo se defiende y recibe solo {attack - finalDamage} puntos de daño");
                 Console.WriteLine($"Vida restante del monstruo: {monsterLife}");
                 return monsterLife;
             }
@@ -228,7 +228,7 @@ namespace BattleFunction
                 Console.WriteLine($"{name} ataca y hace {attack} puntos de daño");
                 int finalDamage = attack * monsterReduction / 100;
                 monsterLife -= (attack - finalDamage);
-                Console.WriteLine($"El monstruo se defiende y recibe solo {finalDamage} puntos de daño");
+                Console.WriteLine($"El monstruo se defiende y recibe solo {attack - finalDamage} puntos de daño");
                 Console.WriteLine($"Vida restante del monstruo: {monsterLife}");
                 return monsterLife;
             }
