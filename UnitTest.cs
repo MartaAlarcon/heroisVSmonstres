@@ -6,7 +6,7 @@ namespace UnitTest
     public class UnitTest1
     {
         [TestMethod]
-        public void TestA�adirValoresPersonalizados_DentroDelRango()
+        public void TestAñadirValoresPersonalizados_DentroDelRango()
         {
             // Arrange
             int life = 3000;
@@ -14,14 +14,14 @@ namespace UnitTest
             int max = 3750;
 
             // Act
-            bool result = V2.A�adirValoresPersonalizados(life, max, min);
+            bool result = V2.AñadirValoresPersonalizados(life, max, min);
 
             // Assert
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void TestA�adirValoresPersonalizados_FueraDelRango()
+        public void TestAñadirValoresPersonalizados_FueraDelRango()
         {
             // Arrange
             int life = 150;
@@ -29,7 +29,7 @@ namespace UnitTest
             int max = 3750;
 
             // Act
-            bool result = V2.A�adirValoresPersonalizados(life, max, min);
+            bool result = V2.AñadirValoresPersonalizados(life, max, min);
 
             // Assert
             Assert.IsFalse(result);
@@ -65,7 +65,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestEscogerDificultad_EnElL�miteInferior()
+        public void TestEscogerDificultad_EnElLímiteInferior()
         {
             // Arrange
             int level = 1;
@@ -80,7 +80,7 @@ namespace UnitTest
         }
 
         [TestMethod]
-        public void TestEscogerDificultad_EnElL�miteSuperior()
+        public void TestEscogerDificultad_EnElLímiteSuperior()
         {
             // Arrange
             int level = 4;
@@ -92,6 +92,38 @@ namespace UnitTest
 
             // Assert
             Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void MostrarValores_MostrarValoresCorrectos()
+        {
+            // Arrange
+            int vida = 1500;
+            int ataque = 200;
+            int reduccion = 25;
+
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                // Act
+                V2.MostrarValores(vida, ataque, reduccion);
+
+                // Assert
+                string expectedOutput = $"Vida: {vida}\r\nAtaque: {ataque}\r\nReducción: {reduccion}\r\n";
+                Assert.AreEqual(expectedOutput, sw.ToString());
+            }
+
+        }
+        public void IntroducirNombrePersonajes_RetornarEntradaDelUsuario()
+        {
+            // Arrange
+            string input = "Nombre1 Nombre2 Nombre3 Nombre4";
+
+            // Act
+            string result = V2.IntroducirNombrePersonajes();
+
+            // Assert
+            Assert.AreEqual(input, result);
         }
     }
 }
